@@ -42,7 +42,7 @@ public class FileDAO {
         if (propertiesFile.exists()) {
             boolean checkFileConfig = l.checkFileConfig(propertiesFile);
             if (checkFileConfig == false) {
-                System.out.println("System shutdown");
+                System.out.println("Can't find properties file");
                 
             } else{
                 try {
@@ -57,7 +57,7 @@ public class FileDAO {
                 }
             }
         } else {
-            System.out.println("Not found");
+//            System.out.println("Not found");
             createFileConfig(propertiesFile, prop);
         }
     }
@@ -99,11 +99,11 @@ public class FileDAO {
     }
 
     public void copyFolder(String copyFolder, String path) {
-        File f1 = new File(copyFolder);
-        File f2 = new File(path);
+        File t1 = new File(copyFolder);
+        File t2 = new File(path);
         
-        if (l.checkInformationConfig(f1, f2)) {
-            File[] listOfFiles = f1.listFiles();
+        if (l.checkInformationConfig(t1, t2)) {
+            File[] listOfFiles = t1.listFiles();
             System.out.println("Copy is running\nFile Name:");
             for (int i = 0; i < listOfFiles.length; i++) {
                 if (listOfFiles[i].isFile()) {
@@ -119,12 +119,12 @@ public class FileDAO {
     }
 
     public void copyFile(String file, String folder) {
-        File f1 = new File(file);
-        File f2 = new File(folder);
-        if (f1.exists() && f1.isFile() && f2.exists() && f2.isDirectory()) {
+        File t1 = new File(file);
+        File t2 = new File(folder);
+        if (t1.exists() && t1.isFile() && t2.exists() && t2.isDirectory()) {
             try {
-                FileInputStream fis = new FileInputStream(f1);
-                FileOutputStream fos = new FileOutputStream(folder + "/" + f1.getName());
+                FileInputStream fis = new FileInputStream(t1);
+                FileOutputStream fos = new FileOutputStream(folder + "/" + t1.getName());
                 int b;
                 while ((b = fis.read()) != -1) {
                     fos.write(b);
